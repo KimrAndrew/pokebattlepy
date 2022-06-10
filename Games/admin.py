@@ -1,5 +1,7 @@
 from django.contrib import admin
 from Games.models.game import Game
+from Games.models.pokemon import Pokemon
+from Games.models.types import Type
 
 
-admin.site.register(Game)
+admin.site.register((Game,Type,Pokemon))
