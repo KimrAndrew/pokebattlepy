@@ -103,16 +103,6 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": env.str("PROD_DATABASE_ENGINE"),
-#         "NAME": env.str("PROD_DATABASE_NAME"),
-#         "USER": env.str("PROD_DATABASE_USER"),
-#         "PASSWORD": env.str("PROD_DATABASE_PASSWORD"),
-#         "HOST": env.str("PROD_DATABASE_HOST"),
-#         "PORT": env.int("PROD_DATABASE_PORT"),
-#     }
 if 'test' in sys.argv:
     #Configuration for test database
     DATABASES = {
@@ -131,17 +121,6 @@ if 'test' in sys.argv:
 else:
   #Default configuration
     DATABASES = {
-        # 'default': {
-        #     'ENGINE': 'django.db.backends.postgresql',
-        #     'NAME': 'd7hasadas9hqts5',
-        #     'USER': 'nybkduadsdgqot',
-        #     'PASSWORD': 'bb535b9cdsfsdfdsfdsfac54851f267444dd8cc230b2a786ab9f446',
-        #     'HOST': 'ec2-54-247-132-38.eu-west-1.compute.amazonaws.com',
-        #     'PORT': 5432,
-        #     'TEST': {
-        #         'NAME': 'd7hasadas9hqts5',
-        #     }
-        # }
         "default": {
             "ENGINE": env.str("PROD_DATABASE_ENGINE"),
             "NAME": env.str("PROD_DATABASE_NAME"),
