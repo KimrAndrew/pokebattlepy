@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import environ
 from datetime import timedelta
+import sys
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -103,16 +104,56 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": env.str("DATABASE_ENGINE"),
-        "NAME": env.str("DATABASE_NAME"),
-        "USER": env.str("DATABASE_USER"),
-        "PASSWORD": env.str("DATABASE_PASSWORD"),
-        "HOST": env.str("DATABASE_HOST"),
-        "PORT": env.int("DATABASE_PORT"),
+# DATABASES = {
+#     "default": {
+#         "ENGINE": env.str("PROD_DATABASE_ENGINE"),
+#         "NAME": env.str("PROD_DATABASE_NAME"),
+#         "USER": env.str("PROD_DATABASE_USER"),
+#         "PASSWORD": env.str("PROD_DATABASE_PASSWORD"),
+#         "HOST": env.str("PROD_DATABASE_HOST"),
+#         "PORT": env.int("PROD_DATABASE_PORT"),
+#     }
+if 'test' in sys.argv:
+    #Configuration for test database
+    DATABASES = {
+      "default": {
+        "ENGINE": env.str("TEST_DATABASE_ENGINE"),
+        "NAME": env.str("TEST_DATABASE_NAME"),
+        "USER": env.str("TEST_DATABASE_USER"),
+        "PASSWORD": env.str("TEST_DATABASE_PASSWORD"),
+        "HOST": env.str("TEST_DATABASE_HOST"),
+        "PORT": env.int("TEST_DATABASE_PORT"),
+            'TEST': {
+                'NAME': env.str("TEST_DATABASE_NAME"), #This is an important entry
+            }
+        }
     }
-}
+else:
+  #Default configuration
+    DATABASES = {
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.postgresql',
+        #     'NAME': 'd7hasadas9hqts5',
+        #     'USER': 'nybkduadsdgqot',
+        #     'PASSWORD': 'bb535b9cdsfsdfdsfdsfac54851f267444dd8cc230b2a786ab9f446',
+        #     'HOST': 'ec2-54-247-132-38.eu-west-1.compute.amazonaws.com',
+        #     'PORT': 5432,
+        #     'TEST': {
+        #         'NAME': 'd7hasadas9hqts5',
+        #     }
+        # }
+        "default": {
+            "ENGINE": env.str("PROD_DATABASE_ENGINE"),
+            "NAME": env.str("PROD_DATABASE_NAME"),
+            "USER": env.str("PROD_DATABASE_USER"),
+            "PASSWORD": env.str("PROD_DATABASE_PASSWORD"),
+            "HOST": env.str("PROD_DATABASE_HOST"),
+            "PORT": env.int("PROD_DATABASE_PORT"),
+                'TEST': {
+                    'NAME': env.str("PROD_DATABASE_NAME"), #This is an important entry
+                }
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
