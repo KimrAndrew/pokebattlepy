@@ -101,6 +101,12 @@ type_table = {
     'weaknesses': ['steel','poison'],
     'resistances': ['fighting','dark','bug'],
     'immunities': ['dragon']
+  },
+
+  'dark': {
+    'weaknesses': ['bug','fairy','fighting'],
+    'resistances': ['dark','ghost'],
+    'immunities': ['psychic']
   }
 }
 
