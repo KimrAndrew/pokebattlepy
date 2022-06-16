@@ -30,3 +30,5 @@ def seed_type_data(types):
         print(f'    Data for Type: {type} added successfully!\n')
         
 
+if __name__ == '__main__':
+    seed_type_data(type_table)
