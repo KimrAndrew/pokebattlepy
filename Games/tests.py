@@ -11,5 +11,6 @@ class PokemonTestCase(TestCase):
     def test_poke(self):
         print('Method: test_poke')
         for id in range(1,5):
-            poke = Pokemon.objects.create(id=id)
-            poke.init()
+            poke = Pokemon.create(id=id)
+            #poke.init()
+            print(poke)
