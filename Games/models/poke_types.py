@@ -32,11 +32,12 @@ class PokeType(models.Model):
     def __str__(self):
         return self.name
 
-    # def _get_abbrev(self,type):
-    #     types = {
-    #         'Fire': 'FIR',
-    #         'Grass': 'GRS',
-    #         'Water': 'WTR',
-    #         'Bug': 'BUG',
-    #         'Normal': 'NRM',
-    #     }
+    def __repr__(self) -> str:
+        return (
+            f"""
+            name: {self.name}
+            resistances: {self.resistances}
+            immunities: {self.immunities}
+            weaknesses: {self.weaknesses}
+            """
+        )
