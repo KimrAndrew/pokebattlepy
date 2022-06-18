@@ -5,7 +5,7 @@ from GameLogic.damage_calculator import attack
 from GameLogic.create_pokemon import create_pokemon
 from GameLogic.handle_attack import calculations
 
-from .models import Game
+from Games.models.game import Game
 from Users.models import Trainer
 from .serializer import GameSerializer
 

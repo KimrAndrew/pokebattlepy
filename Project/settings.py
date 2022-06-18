@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import environ
 from datetime import timedelta
+import sys
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -102,17 +103,36 @@ WSGI_APPLICATION = 'Project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-
-DATABASES = {
-    "default": {
-        "ENGINE": env.str("DATABASE_ENGINE"),
-        "NAME": env.str("DATABASE_NAME"),
-        "USER": env.str("DATABASE_USER"),
-        "PASSWORD": env.str("DATABASE_PASSWORD"),
-        "HOST": env.str("DATABASE_HOST"),
-        "PORT": env.int("DATABASE_PORT"),
+if 'test' in sys.argv:
+    #Configuration for test database
+    DATABASES = {
+      "default": {
+        "ENGINE": env.str("TEST_DATABASE_ENGINE"),
+        "NAME": env.str("TEST_DATABASE_NAME"),
+        "USER": env.str("TEST_DATABASE_USER"),
+        "PASSWORD": env.str("TEST_DATABASE_PASSWORD"),
+        "HOST": env.str("TEST_DATABASE_HOST"),
+        "PORT": env.int("TEST_DATABASE_PORT"),
+            'TEST': {
+                'NAME': env.str("TEST_DATABASE_NAME"), #This is an important entry
+            }
+        }
     }
-}
+else:
+  #Default configuration
+    DATABASES = {
+        "default": {
+            "ENGINE": env.str("PROD_DATABASE_ENGINE"),
+            "NAME": env.str("PROD_DATABASE_NAME"),
+            "USER": env.str("PROD_DATABASE_USER"),
+            "PASSWORD": env.str("PROD_DATABASE_PASSWORD"),
+            "HOST": env.str("PROD_DATABASE_HOST"),
+            "PORT": env.int("PROD_DATABASE_PORT"),
+                'TEST': {
+                    'NAME': env.str("PROD_DATABASE_NAME"), #This is an important entry
+                }
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -171,7 +191,8 @@ CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://poke-battle-py.herokuapp.com'
+    'https://poke-battle-py.herokuapp.com',
+    'https://pokebattlepy.herokuapp.com'
 ]
 
 JWT_AUTH = {
